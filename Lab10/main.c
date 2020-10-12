@@ -45,8 +45,7 @@ int main()
     int n;
     scanf("%d", &n);
     MyArray resultArray = createAnArray(n);
-    int i;
-    for (i = 0; i < resultArray.size; i++) {
+    for (int i = 0; i < resultArray.size; i++) {
         printf("%d ", resultArray.array[i]);
     }
 

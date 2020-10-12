@@ -73,8 +73,7 @@ int main()
     int mDay = dateNow->tm_mday;
     int month = 1 + dateNow->tm_mon;
     int year = 1900 + dateNow->tm_year;
-    int i;
-    for (i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) {
         fprintf(output, "%d%d.%d%d.%d\n", mDay / 10, mDay % 10, month / 10, month % 10, year);
         findNextDate(&mDay, &month, &year);
     }

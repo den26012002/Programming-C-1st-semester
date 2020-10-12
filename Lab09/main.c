@@ -26,8 +26,7 @@ int main()
     int cntDigits = 0;
     int cntUpperCase = 0;
     int cntLowerCase = 0;
-    int i;
-    for (i = 0; i < strlen(str); i++) {
+    for (int i = 0; i < strlen(str); i++) {
         if (str[i] >= '0' && str[i] <= '9') {
             cntDigits++;
         }

@@ -6,9 +6,8 @@ int main()
     Triangle triangle;
     Point apexes[3];
     printf("Enter apexes: \n");
-    int i;
     float x, y;
-    for (i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++) {
         scanf("%f %f", &x, &y);
         apexes[i] = createPoint(x, y);
     }
