@@ -9,11 +9,11 @@ int main()
     float x, y;
     for (int i = 0; i < 3; i++) {
         scanf("%f %f", &x, &y);
-        apexes[i] = createPoint(x, y);
+        createPoint(&apexes[i], x, y);
     }
-    triangle = createTriangleWithPoints(apexes[0], apexes[1], apexes[2]);
-    printf("perimeter of the triangle = %f\n", findPerimeter(triangle));
-    printf("square of the triangle = %f\n", findSquare(triangle));
+    createTriangleWithPoints(&triangle, &apexes[0], &apexes[1], &apexes[2]);
+    printf("perimeter of the triangle = %f\n", findPerimeter(&triangle));
+    printf("square of the triangle = %f\n", findSquare(&triangle));
 
     return 0;
 }
