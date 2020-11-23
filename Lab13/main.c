@@ -9,6 +9,10 @@
 
 int main(int argc, char* argv[])
 {
+    if (argc < 2) {
+        printf("Error: not enough arguments");
+        return 0;
+    }
     FILE *input;
     FILE *output;
     char* filename = malloc(strlen(argv[1] + 1) * sizeof(char));
@@ -28,20 +32,24 @@ int main(int argc, char* argv[])
     unsigned char *buffer = malloc(sizeOfFile * sizeof(unsigned char));
     fread(buffer, 1, sizeOfFile, input);
     fclose(input);
+    if (buffer[3] != 2) {
+        printf("Error: this file isn't supported");
+        free(filename);
+        free(outputFileName);
+        return 0;
+    }
     MP3V2 mp3;
     readMP3V2(&mp3, buffer, sizeOfFile);
-    if (!strcmp(argv[2], "--show")) {
+    if (argc >= 3 && !strcmp(argv[2], "--show")) {
         showAllFramesV2(&(mp3.metadata));
-    }
-    else if (!strncmp(argv[2], "--get=", 6)) {
+    } else if (argc >= 3 && strlen(argv[2]) >= 6 && !strncmp(argv[2], "--get=", 6)) {
         char* name = malloc((strlen(argv[2]) - 6 + 1) * sizeof(char));
         for (int i = 6; i < strlen(argv[2]); i++) {
             name[i - 6] = argv[2][i];
         }
         name[strlen(argv[2]) - 6] = '\0';
         showFrameWithNameV2(&(mp3.metadata), name);
-    }
-    else if (!strncmp(argv[2], "--set=", 6)) {
+    } else if (argc >= 4 && strlen(argv[2]) >= 6 && strlen(argv[3]) >= 8 && !strncmp(argv[2], "--set=", 6) && !strncmp(argv[3], "--value=", 8)) {
         char* name = malloc((strlen(argv[2]) - 6 + 1) * sizeof(char));
         for (int i = 6; i < strlen(argv[2]); i++) {
             name[i - 6] = argv[2][i];
@@ -54,6 +62,8 @@ int main(int argc, char* argv[])
         value[strlen(argv[3]) - 8] = '\0';
         editFrameWithNameV2(&(mp3.metadata), name, value);
         SaveChangesToFileV2(outputFileName, &mp3);
+    } else {
+        printf("Error: unknown command");
     }
     free(filename);
     free(outputFileName);
