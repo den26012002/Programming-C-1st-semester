@@ -18,7 +18,6 @@ void play(const BMP* bmp, const char* outputDir, const int maxIter, const int du
         for (int j = 3; j >= 0; j--) {
             realFileWay[shift++] = (char)((int)(((int)(i / pow(10, j)) % 10) + (int)'0'));
         }
-        //printf("\n");
         char* bmp = ".bmp";
         for (int j = 0; j < 4; j++) {
             realFileWay[shift++] = bmp[j];
@@ -57,7 +56,6 @@ void nextGeneration(BMP* generation) {
                     newY -= pixelsHeight;
                 }
                 sum -= getPixel(&(generation->pixelsArray), newX, newY);
-                //printf("%d ", sum);
             }
             if (sum < 2 || sum > 3) {
                 setPixel(array, x, y, 1);

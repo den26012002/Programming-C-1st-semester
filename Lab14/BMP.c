@@ -1,23 +1,23 @@
 #include <stdio.h>
 #include "BMP.h"
 
-void readBMP(BMP* bmp, const unsigned char* buffer) {
-    //printf("Read bmp started\n");
+Error readBMP(BMP* bmp, const unsigned char* buffer) {
     unsigned int shift = 0;
     readBMPHeader(&(bmp->header), buffer, &shift);
-    //printf("Shift: %d\n", shift);
+    if (!checkHeader(&(bmp->header))){
+        return ERROR_INCORRECT_FORMAT;
+    }
     readBMPInfo(&(bmp->info), buffer, &shift);
-    //printf("Shift: %d\n", shift);
-    //printf("Read BMP: info: colors used: %d\n", bmp->info.colorsUsed);
+    if (!checkMonochromatic(&(bmp->info))) {
+        return ERROR_ISNT_MONOCHROMATIC;
+    }
     bmp->colors = malloc(bmp->info.colorsUsed * sizeof(Color));
     for (int i = 0; i < bmp->info.colorsUsed; i++) {
         readColor(&(bmp->colors[i]), buffer, &shift);
-        //printf("Shift: %d\n", shift);
     }
     unsigned int size = bmp->info.realPixelsWidth * bmp->info.pixelsHeight / 32;
     readPixelsArray(&(bmp->pixelsArray), size, (bmp->info.realPixelsWidth), buffer, &shift);
-    //printf("Shift: %d\n", shift);
-    //printf("Read bmp finished\n");
+    return SUCCESS;
 }
 
 void writeBMPToFile(const BMP* bmp, const unsigned char* filename) {

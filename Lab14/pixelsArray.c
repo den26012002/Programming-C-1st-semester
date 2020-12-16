@@ -48,8 +48,6 @@ void setPixel(PixelsArray* pixelsArray, int x, int y, unsigned int value) {
     int position = y * pixelsArray->realPixelsWidth + x;
     int arrayPosition = position / 32;
     int offset = position % 32;
-    //pixelsArray->array[arrayPosition] |= (value << (31 - offset));
-    //pixelsArray->array[arrayPosition] &= ((value << (31 - offset)) & ~(1 << (31 - offset)));
     pixelsArray->array[arrayPosition] &= ~(1 << (31 - offset));
     pixelsArray->array[arrayPosition] |= (value << (31 - offset));
 }

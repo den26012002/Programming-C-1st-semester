@@ -5,6 +5,7 @@
 #include "info.h"
 #include "color.h"
 #include "pixelsArray.h"
+#include "errorCatch.h"
 
 typedef struct BMP {
     BMPHeader header;
@@ -13,7 +14,7 @@ typedef struct BMP {
     PixelsArray pixelsArray;
 } BMP;
 
-void readBMP(BMP*, const unsigned char*);
+enum Error readBMP(BMP*, const unsigned char*);
 
 void writeBMPToFile(const BMP*, const unsigned char*);
 
