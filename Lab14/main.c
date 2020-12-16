@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
     FILE* input;
     char* inputFileName;
     char* outputDirectory;
-    int maxIter = 100;
+    int maxIter = 9999;
     int dumpFreq = 1;
     int wasInputArg = 0;
     int wasOutputArg = 0;
