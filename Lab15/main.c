@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "archive.h"
-
+#include "compression.h"
 
 int main(int argc, char* argv[])
 {
@@ -22,6 +22,7 @@ int main(int argc, char* argv[])
         }
         writeArchiveToFile(&archive, archiveName);
         printf("Creating finished!\n");
+
     }
     else {
         unsigned char* buffer;
@@ -34,5 +35,24 @@ int main(int argc, char* argv[])
             showArchiveList(&archive);
         }
     }
+
+    //unsigned char* buffer1;
+    //int fileSize1 = readFileToBuffer(&buffer1, archiveName);
+
+
+    //CompressedHaffmanArchive arc;
+
+    //расжатие
+    //readCompressedHaffmanArchive(&arc, buffer1);
+    //decompressArchiveToFile(&arc, archiveName);
+
+    //сжатие
+    //findCompressionTable(&arc, buffer1, fileSize1);
+    //compressToArchive(&arc, buffer1, fileSize1);
+    //writeCompressedHaffmanArchiveToFile(&arc, archiveName);
+
+
+
+
     return 0;
 }
